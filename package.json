@@ -1,14 +1,21 @@
 {
   "name": "publicspace",
   "version": "1.0.0",
-  "description": "",
+  "description": "A vanilla project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "vanilla",
+    "server-sent-events",
+  ],
   "author": "segun ola",
   "license": "ISC",
   "dependencies": {
     "mime": "^1.3.4"
-  }
+  },
+  "engines": {
+      "node": "6.9.1"
+  },
 }
