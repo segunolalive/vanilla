@@ -1,0 +1,109 @@
+html, body {
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    background: rgba(248, 251, 255, 0.2);
+}
+
+header {
+    text-align: center;
+}
+.sidebar {
+    width: 20%;
+    float: left;
+    background-color: #eee;
+}
+
+main {
+    width: 80%;
+    float: right;
+    margin: 20px;
+}
+
+.inputSection {
+    bottom: 0px;
+    position: fixed;
+    width: 100%
+}
+
+#username {
+    width: 100%;
+}
+
+#messages {
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.username {
+    color: green;
+    font-weight: bold;
+    font-style: italic;
+    border-bottom:  1px solid #eee;
+}
+
+.messageBody {
+    color: #888;
+}
+
+.time {
+    float: right;
+    padding: 10px;
+    font-size: 0.65em;
+    color: #bcbcbc;
+}
+
+.messagePanel {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background: #fff;
+}
+
+.messagePanel p {
+    padding: 10px;
+}
+
+form input, form textarea {
+    border-radius: 5px;
+    width: 100%;
+    display: inline-block;
+}
+
+.message_form {
+    float: left;
+    width: 80%;
+}
+
+.entries {
+    width: 80%;
+    float: left;
+}
+
+.entries textarea {
+    resize: none;
+}
+
+.entries input {
+    margin-bottom: 10px;
+}
+.submit {
+    width: 20%;
+    float: right;
+    text-align: center;
+
+}
+.submit input {
+    height: 60px;
+    max-width: 60px;
+    border-radius: 50%;
+    background-color: #33ee77;
+    color: white;
+    font-weight: #ddd;
+}
+
+
+.clearfix {
+    clear: both;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/main.css" media="screen" title="no title" charset="utf-8">
+        <title>Vanilla</title>
+    </head>
+    <body>
+        <header>
+            <div class="">
+                <h1>My Vanilla Project</h1>
+            </div>
+        </header>
+        <!-- <aside class="sidebar">
+            <div class="rooms">
+                <ul>
+                    <li>BLW</li>
+                    <li>Haven</li>
+                </ul>
+            </div>
+        </aside> -->
+        <main>
+            <section id="messages">
+            </section>
+            <section class="inputSection">
+                <form class="message_form" action="./public/posts.json" method="POST">
+                    <div class="entries">
+                        <!-- <input type="text" name="username" value="" placeholder="Enter your name"> -->
+                        <textarea name="message" rows="3" cols="40" placeholder="What's on your mind?"></textarea>
+                    </div>
+                    <div class="submit">
+                        <input type="submit" name="post" value="POST">
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </form>
+            </section>
+
+        </main>
+        <script type="text/javascript" src="/static/index.js"></script>
+    </body>
+</html>
