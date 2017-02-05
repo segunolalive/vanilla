@@ -3,7 +3,9 @@ html, body {
     margin: 0;
 }
 body {
-    background: rgba(248, 251, 255, 0.2);
+    background: rgba(29, 70, 44, 0.72);
+    /*background: #e8eff9;*/
+    /*background: rgba(248, 251, 255, 0.2);*/
 }
 
 header {
@@ -27,13 +29,9 @@ main {
     width: 100%
 }
 
-#username {
-    width: 100%;
-}
-
 #messages {
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 120px;
 }
 
 .username {
@@ -71,9 +69,14 @@ form input, form textarea {
     display: inline-block;
 }
 
+form textarea {
+    height: 5em;
+}
+
 .message_form {
     float: left;
     width: 80%;
+    margin-bottom: 20px;
 }
 
 .entries {

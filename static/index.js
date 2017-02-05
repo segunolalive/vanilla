@@ -14,6 +14,7 @@ window.addEventListener('load', function () {
         // Do something with the granted permission.
         let newMessage = new Notification('Vanilla', {tag: 'your notifications' +
         'show up here'});
+        closeNotification(newMessage);
       });
   }
 });
@@ -21,22 +22,27 @@ window.addEventListener('load', function () {
 
 function messageNotification (data) {
     let options = {
-        body: data.message
+        body: `${data.name}: ${data.message}`
     }
     if (!window.Notification) {
         return;
     } else if (Notification.permission === 'granted') {
         let newMessage = new Notification('Vanilla', options);
+        closeNotification(newMessage);
     } else if (Notification.permission !== 'denied') {
         Notification.requestPermission().then((result)=>{
             // If the user accepts, let's create a notification
             if (permission === "granted") {
                 let newMessage = new Notification('Vanilla', options);
+                closeNotification(newMessage);
             }
         });
     }
 }
 
+function closeNotification(message) {
+    setTimeout(message.close.bind(message), 4000);
+}
 
 var message_form = document.querySelector('.message_form');
 message_form.addEventListener('submit', handleMessage, false);
@@ -122,7 +128,7 @@ function scrollUp (el) {
 function updateDOM(data) {
     var div = elt('div', {class: 'messagePanel'});
     var namePara = elt('p', {class: 'username'});
-    namePara.textContent = data.name + ' says:';
+    namePara.textContent = data.name + ':';
     var time = elt('span', {class: 'time'})
     time.textContent = getTime(data.date);
     var messagePara = elt('p', {class: 'messageBody'});
