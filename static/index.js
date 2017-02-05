@@ -1,3 +1,43 @@
+window.addEventListener('load', function () {
+  // At first, let's check if we have permission for notification
+  // If not, let's ask for it
+  if (window.Notification && Notification.permission !== "granted") {
+      Notification.requestPermission().then((result)=>{
+        if (result === 'denied') {
+          console.log('Permission wasn\'t granted. Allow a retry.');
+          return;
+        }
+        if (result === 'default') {
+          console.log('The permission request was dismissed.');
+          return;
+        }
+        // Do something with the granted permission.
+        let newMessage = new Notification('Vanilla', {tag: 'your notifications' +
+        'show up here'});
+      });
+  }
+});
+
+
+function messageNotification (data) {
+    let options = {
+        body: data.message
+    }
+    if (!window.Notification) {
+        return;
+    } else if (Notification.permission === 'granted') {
+        let newMessage = new Notification('Vanilla', options);
+    } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then((result)=>{
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                let newMessage = new Notification('Vanilla', options);
+            }
+        });
+    }
+}
+
+
 var message_form = document.querySelector('.message_form');
 message_form.addEventListener('submit', handleMessage, false);
 
@@ -35,14 +75,13 @@ function handleMessage(event) {
         name = localStorage.getItem('name')
     }
     var inputs = message_form.elements;
-    // var name = inputs['username'].value;
     var message = inputs['message'].value;
     var payload = {
         name: name,
         message: message,
     };
-    // inputs['username'].value = '';
     inputs['message'].value = '';
+    inputs['message'].focus();
 
     ajaxRequest('/rooms/private', 'POST', payload);
     event.preventDefault();
@@ -96,6 +135,7 @@ function updateDOM(data) {
     var messagesDiv = document.getElementById('messages');
     messagesDiv.appendChild(div);
     scrollUp(messagesDiv);
+    messageNotification(data);
 }
 
 
