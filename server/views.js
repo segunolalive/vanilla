@@ -65,7 +65,7 @@ views.archive = function home (request, response) {
 
 // Fix this view
 views.getRooms = function getRoom (request, response) {
-    fs.readFile('../publicSpace/public/posts.json',
+    fs.readFile('.public/posts.json',
                 function(err, data){
         if (err)
             console.log(err.toString());
@@ -144,7 +144,7 @@ views.postMessage = function postMessage(request, response, room) {
             latestChats.push(JSON.stringify(parsedData));
             // fix path for appendFile function.
             // var path = urlToPath(request.url);
-            var path = '../publicSpace/public/posts.json'; // change this later
+            var path = './public/posts.json'; // change this later
             fs.appendFile(path, jsonData, (err)=> {
                 if (err)
                     console.log(err.toString());
