@@ -1,6 +1,8 @@
 const fs = require("fs");
 const url = require('url');
 
+const Render = require('./templateRenderer');
+const render = new Render();
 
 var views = module.exports = Object.create(null);
 
@@ -29,6 +31,34 @@ views.home = function home (request, response) {
             console.log(err.toString());
         else{
             response.end(data);
+        }
+    })
+};
+
+
+views.archive = function home (request, response) {
+    fs.readFile('./server/archive.html', 'utf8', (err, data)=>{
+        if (err)
+            console.log(err.toString());
+        else{
+            let template = data;
+            let file = './public/posts.json';
+            fs.readFile(file, 'utf8', (err, data)=>{
+                if (err)
+                    console.log(err.toString());
+                else {
+                    let posts = data.split('\n');
+                    posts = posts.slice(0, -1).map((post)=>{
+                        return JSON.parse(post);
+                    });
+                    let context= {
+                        posts: posts,
+                        title: 'Vanilla'
+                    };
+                    let page = render.render(template, context);
+                    response.end(page);
+                }
+            })
         }
     })
 };

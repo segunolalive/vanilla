@@ -147,20 +147,63 @@ function instantiateBlk(text, context) {
     return preBlockText + innerBlock + postBlockText;
 }
 
+
+
+
+const fake = `Here we are
+            {{wish.first.eat}}
+            {{wish.second}}
+            {{page}}
+            yay {% each list %}  {{item.pet}} {{item.name}} {% endeach %} bleh`;
+
+
+// var animals = ['cat', 'dog', 'cow', 'rat'];
+var animals = [
+    {pet:'cat', name: 'molly'},
+    {pet:'dog', name: 'Billy'},
+    {pet: 'cow', name: 'Barney'},
+    {pet: 'rat', name: 'Splinter'}
+];
+
+var context = {
+    list : animals,
+    page : 4,
+    wish : {
+        first: {eat: 'food'},
+        second: 'health'
+    }
+};
+console.log(instantiate(fake, context));
+// instantiate(fake, context)
+
+const arg = `<main>
+    {% each posts %}
+    <div class="messagePanel">
+        <span class="time">{{ call Date post.date }}</span>
+        <p class="username"> {{post.name}} </p>
+        <p class="messageBody"> {{post.message}} </p>
+    </div>
+    {% endeach %}
+</main>`;
+
+const posts = [
+  { name: 'Tosin', message: 'sup dude', date: '2017-02-05T19:49:23.674Z' },
+  { name: 'Tosin', message: 'HEy', date: '2017-02-05T19:52:19.253Z' },
+  { name: 'Tosin', message: 'I\'m here, dude', date: '2017-02-05T19:54:06.664Z' }
+];
+
+const collection = { posts : posts };
+
+console.log(instantiate(arg, collection));
+
 // function instantiateText(text, context) {
 //     return text.replace(/\{\{\s?(.+?)\s?\}\}/g, (_, name)=>{
+//         console.log(name);
 //         if (varIsCallable(name)) {
+//             console.log('Callable');
 //             let matchArray = name.split(' ');
-//             // change this to be more elegant. Abstract it into its own fnction
-//             // let subsText = matchArray[2].split('.')[1]
-//             // return Callables[matchArray[1]](context[subsText]);
-//             let caller = matchArray[1];
-//             let callee = matchArray[matchArray.length - 1];
-//             if (varIsPath(callee)) {
-//                 let arg = `{{${callee}}}`;
-//                 Callables[caller](instantiate(arg, context));
-//             }
-//             return Callables[caller](context[callee]);
+//             // console.log(instantiateText(matchArray[2]));
+//             return Callables[matchArray[1]](context[matchArray[2]]);
 //         } else if (varIsPath(name)) {
 //             let pathArray = name.split('.');
 //             let item = context;

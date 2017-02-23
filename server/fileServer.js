@@ -11,7 +11,9 @@ var Server = module.exports = function (request, response) {
     function respond(code, body, type) {
         if (!type) type = "text/plain";
             response.writeHead(code, {"Content-Type": type});
-            response.writeHead(code, {'Cache-Control': 'public, max-age=2592000'});
+            response.writeHead(code, {
+                'Cache-Control': 'public, max-age=2592000'
+            });
         if (body && body.pipe)
             body.pipe(response);
         else

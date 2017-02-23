@@ -25,6 +25,7 @@ http.createServer(function(request, response) {
 
 
 router.add('GET', /^\/$/, views.home);
+router.add('GET', /^\/archive$/, views.archive);
 router.add('GET', /^\/rooms$/, views.getRooms);
 router.add('GET', /^\/rooms\/([^\/]+)$/, views.getRoom);
 router.add('POST', /^\/rooms\/([^\/]+)$/, views.postMessage);

@@ -3,8 +3,8 @@ html, body {
     margin: 0;
 }
 body {
-    background: rgba(29, 70, 44, 0.72);
-    /*background: #e8eff9;*/
+    /*background: rgba(29, 70, 44, 0.72);*/
+    background: #e8eff9;
     /*background: rgba(248, 251, 255, 0.2);*/
 }
 
