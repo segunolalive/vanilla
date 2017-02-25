@@ -146,34 +146,3 @@ function instantiateBlk(text, context) {
 
     return preBlockText + innerBlock + postBlockText;
 }
-
-// function instantiateText(text, context) {
-//     return text.replace(/\{\{\s?(.+?)\s?\}\}/g, (_, name)=>{
-//         if (varIsCallable(name)) {
-//             let matchArray = name.split(' ');
-//             // change this to be more elegant. Abstract it into its own fnction
-//             // let subsText = matchArray[2].split('.')[1]
-//             // return Callables[matchArray[1]](context[subsText]);
-//             let caller = matchArray[1];
-//             let callee = matchArray[matchArray.length - 1];
-//             if (varIsPath(callee)) {
-//                 let arg = `{{${callee}}}`;
-//                 Callables[caller](instantiate(arg, context));
-//             }
-//             return Callables[caller](context[callee]);
-//         } else if (varIsPath(name)) {
-//             let pathArray = name.split('.');
-//             let item = context;
-//             for (var i = 0; i < pathArray.length; i++) {
-//                 item = item[pathArray[i]];
-//             }
-//             return item;
-//         } else {
-//             if (context[name]) {
-//                 return context[name];
-//             } else {
-//                 return `{{${name}}}`;
-//             }
-//         }
-//     });
-// }

@@ -36,7 +36,7 @@ views.home = function home (request, response) {
 };
 
 
-views.archive = function home (request, response) {
+views.archive = function archive (request, response) {
     fs.readFile('./server/archive.html', 'utf8', (err, data)=>{
         if (err)
             console.log(err.toString());
