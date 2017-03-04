@@ -3,5 +3,4 @@ npm-debug.log
 .DS_Store
 /*.env
 posts.json
-engine.js
 /local
