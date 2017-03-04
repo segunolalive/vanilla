@@ -1,8 +1,10 @@
+"use strict";
 const fs = require("fs");
 const url = require('url');
 
-const Render = require('./templateRenderer');
-const render = new Render();
+const errors = require('./errors');
+const Engine = require('../engine/engine');
+const engine = new Engine();
 
 var views = module.exports = Object.create(null);
 
@@ -20,32 +22,37 @@ function respondJSON(response, status, data) {
 }
 
 
-var rooms = Object.create(null);
+const rooms = [ 'private', 'javascript', 'python', 'php'];
+
 var latestChats = [];
-rooms.private = [];
 
 
-views.home = function home (request, response) {
-    fs.readFile('./index.html', (err, data)=>{
-        if (err)
-            console.log(err.toString());
-        else{
-            response.end(data);
+views.home = (request, response) => {
+    fs.readFile('templates/index.html', 'utf8', (err, data)=>{
+        if (err) {
+            errors.reportError(500, response, err);
+        } else {
+            let template = data;
+            let context = {
+                rooms : rooms
+            }
+            let page = engine.render(template, context);
+            response.end(page);
         }
     })
 };
 
 
-views.archive = function archive (request, response) {
-    fs.readFile('./server/archive.html', 'utf8', (err, data)=>{
-        if (err)
-            console.log(err.toString());
-        else{
+views.archive = (request, response) => {
+    fs.readFile('templates/archive.html', 'utf8', (err, data)=>{
+        if (err) {
+            errors.reportError(500, response);
+        } else {
             let template = data;
             let file = './public/posts.json';
             fs.readFile(file, 'utf8', (err, data)=>{
                 if (err)
-                    console.log(err.toString());
+                    errors.reportError(500, response);
                 else {
                     let posts = data.split('\n');
                     posts = posts.slice(0, -1).map((post)=>{
@@ -55,7 +62,7 @@ views.archive = function archive (request, response) {
                         posts: posts,
                         title: 'Vanilla'
                     };
-                    let page = render.render(template, context);
+                    let page = engine.render(template, context);
                     response.end(page);
                 }
             })
@@ -64,11 +71,10 @@ views.archive = function archive (request, response) {
 };
 
 // Fix this view
-views.getRooms = function getRoom (request, response) {
-    fs.readFile('.public/posts.json',
-                function(err, data){
+views.getRooms = (request, response) => {
+    fs.readFile('.public/posts.json', 'utf8', (err, data) => {
         if (err)
-            console.log(err.toString());
+            console.error(err.toString());
         else{
             response.end(data);
         }
@@ -76,7 +82,7 @@ views.getRooms = function getRoom (request, response) {
 };
 
 
-views.getRoom = function getRoom(request, response, room) {
+views.getRoom = (request, response, room) => {
     if (!room in rooms)
         respond(response, 404, `chat room, ${room} not found`);
     else {
@@ -134,9 +140,11 @@ function constructSSE(response, id, chat, retry) {
 
 views.postMessage = function postMessage(request, response, room) {
     readStreamAsJSON(request, (error, data)=>{
-        if (error)
+        if (error) {
             respond(response, 400, error.toString());
-         else if (room in rooms) {
+        } else if (!room in rooms) {
+            respond(response, 404, `No chatroom with name ${room}`);
+        } else {
             var parsedData = data;
             var date = new Date();
             parsedData["date"] = date;
@@ -147,11 +155,9 @@ views.postMessage = function postMessage(request, response, room) {
             var path = './public/posts.json'; // change this later
             fs.appendFile(path, jsonData, (err)=> {
                 if (err)
-                    console.log(err.toString());
+                    console.error(err.toString());
             });
             respond(response, 204);
-        } else {
-            respond(response, 404, `No chatroom with name ${room}`);
         }
     });
 };
@@ -165,10 +171,10 @@ function urlToPath(requestUrl) {
 
 function readStreamAsJSON(stream, callback) {
     var data = "";
-        stream.on("data", function(chunk) {
+        stream.on("data", (chunk) => {
         data += chunk;
     });
-    stream.on("end", function() {
+    stream.on("end", () => {
         var result, error;
         try {
             result = JSON.parse(data);
@@ -177,7 +183,7 @@ function readStreamAsJSON(stream, callback) {
         }
         callback(error, result);
     });
-    stream.on("error", function(error) {
+    stream.on("error", (error) => {
         callback(error);
     });
 };

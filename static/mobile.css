@@ -1,0 +1,140 @@
+html {
+    font-size: 16px;
+    font-family: "Book Antiqua", "Lucida Bright", "Lucida Sans", "Georgia", sans-serif;
+}
+
+html, body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background: #e8eff9;
+    position: relative;
+
+}
+
+header {
+    top: 0;
+    position: fixed;
+    background-color: #dedbdb;
+    text-align: center;
+    height: 5rem;
+    width: 100%;
+    z-index: 2;
+}
+
+main {
+    margin-top: 5rem;
+    width: auto;
+    height: 100vh;
+    position: relative;
+}
+
+.mainSection {
+    height: 100vh;
+    width: 100%;
+    /*display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;*/
+}
+
+.sidebar {
+    height: 100vh;
+    width: 300px;
+    left: -300px;
+    position: absolute;
+    background-color: #6983cf;
+    border-right: 1px solid #132240;
+}
+
+/* chat messages area*/
+#messages {
+    padding: 10px 20px;
+}
+
+.time {
+    float: right;
+    padding: 10px;
+    font-size: 0.65rem;
+    color: #bcbcbc;
+}
+
+.messagePanel {
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background: #fff;
+    font-size: 1.25rem;
+}
+
+.messagePanel p {
+    padding: 10px;
+}
+
+.username {
+    color: green;
+    font-weight: bold;
+    font-style: italic;
+    border-bottom:  1px solid #eee;
+}
+
+.messageBody {
+    color: #888;
+}
+
+/* end chat messages section */
+
+.inputSection {
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    padding: 0.5rem;
+    height: 4rem;
+    background-color: #ccc;
+}
+
+
+textarea {
+    font-size: 1rem;
+    font-family: "Arial", sans-serif;
+}
+
+form input, form textarea {
+    border-radius: 4px;
+    width: 100%;
+    display: inline;
+    font-size: 1rem;
+    height: 3rem;
+    line-height: 1.5;
+    margin: 5px 10px;
+    resize: none;
+}
+
+/*input[type=submit] {*/
+.submit > input[name=post] {
+    height: 60px;
+    max-width: 60px;
+    border-radius: 50%;
+    background-color: #33ee77;
+    color: white;
+    font-weight: bold;
+}
+
+form {
+    display: inline-flex;
+    flex-flow: row;
+    width: 100%;
+}
+div.entries > textarea {
+    width: 100%;
+}
+div.entries {
+    display: inline-flex;
+    width: 90%;
+}
+.submit {
+    width: 10%;
+    display: inline-flex;
+}

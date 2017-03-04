@@ -1,3 +1,4 @@
+"use strict";
 window.addEventListener('load', function () {
   // At first, let's check if we have permission for notification
   // If not, let's ask for it
@@ -44,6 +45,7 @@ function closeNotification(message) {
     setTimeout(message.close.bind(message), 4000);
 }
 
+
 var message_form = document.querySelector('.message_form');
 message_form.addEventListener('submit', handleMessage, false);
 
@@ -51,7 +53,7 @@ message_form.addEventListener('submit', handleMessage, false);
 function elt(tag, attributes) {
     var node = document.createElement(tag);
     if (attributes){
-        for (attr in attributes) {
+        for (let attr in attributes) {
             if (attributes.hasOwnProperty(attr))
                 node.setAttribute(attr, attributes[attr])
         }
@@ -148,6 +150,8 @@ function updateDOM(data) {
 if (window.EventSource) {
     var source = new EventSource('/rooms/private');
     source.addEventListener('message', sseHandler, false);
+} else {
+    alert("Your browser isn't supported. Try Chrome or Firefox");
 }
 
 function sseHandler (event) {

@@ -9,7 +9,7 @@ const router = new Router();
 const PORT = process.env.PORT || 8000;
 
 
-http.createServer(function(request, response) {
+http.createServer((request, response) => {
   request.on('error', (err)=> {
     console.error(err);
     response.statusCode = 400;
@@ -22,6 +22,8 @@ http.createServer(function(request, response) {
   if (!router.resolve(request, response))
       fileServer(request, response);
 }).listen(PORT);
+
+console.log(`server running on port: ${PORT}`);
 
 
 router.add('GET', /^\/$/, views.home);

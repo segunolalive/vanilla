@@ -1,18 +1,18 @@
-var fs = require("fs");
-var http = require("http");
-var url = require('url');
+const fs = require("fs");
+const http = require("http");
+const url = require('url');
 
 
-var methods = Object.create(null);
+const methods = Object.create(null);
 
 const PORT = process.env.PORT || 8000;
 
-var Server = module.exports = function (request, response) {
+const Server = module.exports = (request, response) => {
     function respond(code, body, type) {
         if (!type) type = "text/plain";
             response.writeHead(code, {"Content-Type": type});
             response.writeHead(code, {
-                'Cache-Control': 'public, max-age=2592000'
+                'Cache-Control': 'public, max-age=2592000, revalidate'
             });
         if (body && body.pipe)
             body.pipe(response);
@@ -28,27 +28,29 @@ var Server = module.exports = function (request, response) {
 
 
 function urlToPath(requestUrl) {
-  var path = url.parse(requestUrl).pathname;
-  var decoded = decodeURIComponent(path);
+  let path = url.parse(requestUrl).pathname;
+  let decoded = decodeURIComponent(path);
   return "." + decoded.replace(/(\/|\\)\.\.(\/|\\|$)/g, "/");
 }
 
 
 methods.GET = function(path, respond) {
-  fs.stat(path, function(error, stats) {
-    if (error && error.code == "ENOENT")
+  fs.stat(path, (error, stats) => {
+    if (error && error.code == "ENOENT"){
       respond(404, "File not found");
-    else if (error)
+    } else if (error) {
       respond(500, error.toString());
-    else if (stats.isDirectory())
-      fs.readdir(path, function(error, files) {
-        if (error)
+    } else if (stats.isDirectory()){
+      fs.readdir(path, (error, files) => {
+        if (error){
           respond(500, error.toString());
-        else
+        } else {
           respond(200, files.join("\n"));
+        }
       });
-    else
+    } else {
       respond(200, fs.createReadStream(path),
               require("mime").lookup(path));
+    }
   });
 };
