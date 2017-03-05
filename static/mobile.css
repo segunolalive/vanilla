@@ -34,10 +34,6 @@ main {
 .mainSection {
     height: 100vh;
     width: 100%;
-    /*display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;*/
 }
 
 .sidebar {
@@ -52,26 +48,31 @@ main {
 /* chat messages area*/
 #messages {
     padding: 10px 20px;
+    /*width: 100%;*/
+    margin-bottom: 6rem; /* height of input section */
 }
 
-.time {
+
+span.time {
     float: right;
     padding: 10px;
-    font-size: 0.65rem;
+    font-size: 1.25rem;
     color: #bcbcbc;
 }
+
 
 .messagePanel {
     border: 1px solid #eee;
     border-radius: 4px;
     margin-bottom: 10px;
     background: #fff;
-    font-size: 1.25rem;
 }
 
-.messagePanel p {
+.messagePanel > p {
     padding: 10px;
+    font-size: 2.5rem;
 }
+
 
 .username {
     color: green;
@@ -86,43 +87,42 @@ main {
 
 /* end chat messages section */
 
+/*input section*/
+
 .inputSection {
     bottom: 0px;
     position: fixed;
     width: 100%;
-    padding: 0.5rem;
-    height: 4rem;
+    padding: 1rem;
+    height: 6rem;
     background-color: #ccc;
 }
 
 
-textarea {
-    font-size: 1rem;
+.inputSection textarea {
+    font-size: 2.5rem;
     font-family: "Arial", sans-serif;
-}
-
-form input, form textarea {
     border-radius: 4px;
     width: 100%;
-    display: inline;
-    font-size: 1rem;
-    height: 3rem;
+    height: 5rem;
     line-height: 1.5;
     margin: 5px 10px;
     resize: none;
 }
 
-/*input[type=submit] {*/
 .submit > input[name=post] {
-    height: 60px;
-    max-width: 60px;
+    height: 80px;
+    width: 80px;
+    font-size: 1.5rem;
+    margin: 5px 10px;
+    border: none;
     border-radius: 50%;
     background-color: #33ee77;
     color: white;
     font-weight: bold;
 }
 
-form {
+.inputSection > form {
     display: inline-flex;
     flex-flow: row;
     width: 100%;
@@ -132,9 +132,11 @@ div.entries > textarea {
 }
 div.entries {
     display: inline-flex;
-    width: 90%;
+    width: 85%;
 }
-.submit {
-    width: 10%;
+div.submit {
+    width: 15%;
     display: inline-flex;
 }
+
+/* end of input section*/
