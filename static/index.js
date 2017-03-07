@@ -123,7 +123,7 @@ function getTime(date) {
 }
 
 function scrollUp (el) {
-    if (!(el.scrollHeight - document.body.clientHeight === el.clientHeight)) {
+    if (!(el.scrollHeight - el.scrollTop === el.clientHeight)) {
         window.scroll(0, (el.scrollHeight));
     }
 }
@@ -144,7 +144,6 @@ function updateDOM(data) {
     var messagesDiv = document.getElementById('messages');
     messagesDiv.appendChild(div);
     scrollUp(messagesDiv);
-    console.log(messagesDiv.scrollHeight, messagesDiv.clientHeight, window.innerHeight);
     messageNotification(data);
 }
 
