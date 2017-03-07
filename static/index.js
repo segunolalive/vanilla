@@ -29,6 +29,7 @@ function messageNotification (data) {
         return;
     } else if (Notification.permission === 'granted') {
         let newMessage = new Notification('Vanilla', options);
+        let vibration = window.navigator.vibrate([300, 100, 300]);
         closeNotification(newMessage);
     } else if (Notification.permission !== 'denied') {
         Notification.requestPermission().then((result)=>{
@@ -122,8 +123,8 @@ function getTime(date) {
 }
 
 function scrollUp (el) {
-    if (!(el.scrollHeight - el.scrollTop === el.clientHeight)) {
-        window.scrollTo(0, (el.scrollHeight));
+    if (!(el.scrollHeight - document.body.clientHeight === el.clientHeight)) {
+        window.scroll(0, (el.scrollHeight));
     }
 }
 
@@ -143,6 +144,7 @@ function updateDOM(data) {
     var messagesDiv = document.getElementById('messages');
     messagesDiv.appendChild(div);
     scrollUp(messagesDiv);
+    console.log(messagesDiv.scrollHeight, messagesDiv.clientHeight, window.innerHeight);
     messageNotification(data);
 }
 
