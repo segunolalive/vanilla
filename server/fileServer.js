@@ -13,7 +13,7 @@ const Server = module.exports = (request, response) => {
             response.writeHead(code, {"Content-Type": type});
             // max-age = 30 days;
             response.writeHead(code, {
-                'Cache-Control': 'public, max-age=2592000, revalidate'
+                'Cache-Control': 'public, max-age=2592000, must-revalidate'
             });
         if (body && body.pipe)
             body.pipe(response);
