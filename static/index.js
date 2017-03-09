@@ -46,8 +46,16 @@ window.addEventListener('load', function () {
         setTimeout(message.close.bind(message), 4000);
     }
 
+    const keyboardSubmit =  (e) => {
+        if (e.keyCode === 13 && e.shiftKey) {
+            handleMessage();
+        }
+    };
+
+
     var message_form = document.querySelector('.message_form');
     message_form.addEventListener('submit', handleMessage, false);
+    message_form.addEventListener('keyup', keyboardSubmit, false);
 
 
     function setName() {
