@@ -14,20 +14,6 @@ body {
     position: relative;
 }
 
-header {
-    top: 0;
-    position: fixed;
-    background-color: #dedbdb;
-    text-align: center;
-    height: 3.5rem;
-    width: 100%;
-    z-index: 2;
-}
-
-header h2 {
-    /*pa*/
-}
-
 main {
     /*margin-top: 5rem;*/
     width: auto;

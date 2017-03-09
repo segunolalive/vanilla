@@ -1,0 +1,17 @@
+{
+    "name": "VanillaChat",
+    "shortname": "VanillaChat",
+    "description": "A simple vanilla javascript group chat app.",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#e8eff9",
+    "theme_color": "#e8eff9",
+    ​​"orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "static/images/vanilla192x192.png",
+            "size": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
