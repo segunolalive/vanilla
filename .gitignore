@@ -2,5 +2,6 @@
 npm-debug.log
 .DS_Store
 /*.env
-posts.json
+/public
 /local
+/images
