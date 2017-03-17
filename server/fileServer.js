@@ -2,6 +2,8 @@ const fs = require("fs");
 const http = require("http");
 const url = require('url');
 
+const mime = require('mime');
+
 
 const methods = Object.create(null);
 
@@ -10,9 +12,9 @@ const PORT = process.env.PORT || 8000;
 const Server = module.exports = (request, response) => {
     function respond(code, body, type) {
         if (!type) type = "text/plain";
-            response.writeHead(code, {"Content-Type": type});
             // max-age = 30 days;
             response.writeHead(code, {
+                "Content-Type": type,
                 'Cache-Control': 'public, max-age=2592000, must-revalidate'
             });
         if (body && body.pipe)
@@ -51,7 +53,7 @@ methods.GET = function(path, respond) {
       });
     } else {
       respond(200, fs.createReadStream(path),
-              require("mime").lookup(path));
+              mime.lookup(path));
     }
   });
 };

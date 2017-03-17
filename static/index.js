@@ -23,19 +23,23 @@ window.addEventListener('load', function () {
 
     function messageNotification (data) {
         let options = {
-            body: `${data.name}: ${data.message}`
+            body: data.message,
+            icon: 'static/images/vanilla192x192.png'
         }
         if (!window.Notification) {
             return;
         } else if (Notification.permission === 'granted') {
-            let newMessage = new Notification('Vanilla', options);
-            let vibration = window.navigator.vibrate([300, 100, 300]);
-            closeNotification(newMessage);
+            if (!(data.name == localStorage.name)){
+                let newMessage = new Notification(data.name, options);
+                let vibration = window.navigator.vibrate([300, 100, 300]);
+                closeNotification(newMessage);
+            }
         } else if (Notification.permission !== 'denied') {
             Notification.requestPermission().then((result)=>{
                 // If the user accepts, let's create a notification
                 if (permission === "granted") {
-                    let newMessage = new Notification('Vanilla', options);
+                    let newMessage = new Notification(data.name, options);
+                    console.log(message);
                     closeNotification(newMessage);
                 }
             });
@@ -46,9 +50,9 @@ window.addEventListener('load', function () {
         setTimeout(message.close.bind(message), 4000);
     }
 
-    const keyboardSubmit =  (e) => {
-        if (e.keyCode === 13 && e.shiftKey) {
-            handleMessage();
+    const keyboardSubmit =  (event) => {
+        if (event.keyCode === 13 && event.shiftKey) {
+            handleMessage(event);
         }
     };
 
@@ -173,4 +177,17 @@ window.addEventListener('load', function () {
             console.error(e);
         }
     }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js', {scope : './'})
+      .then(function(reg) {
+        // registration worked
+        console.log('Registration succeeded. Scope is ' + reg.scope);
+      }).catch(function(error) {
+        // registration failed
+        console.log('Registration failed with ' + error);
+      });
+    }
+    
+
 });

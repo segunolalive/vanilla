@@ -7,6 +7,7 @@ const Engine = module.exports = class {
     };
 }
 
+
 const cmdList = Object.create(null);
 
 cmdList.each = function (blkExp, innerBlock, collection) {
@@ -35,11 +36,11 @@ Callables.Date = function getTime(date) {
     return hours + ':' + minutes;
 }
 
+
 function instantiate(text, context) {
-    text = instantiateBlk(text, context);
-    text = instantiateText(text, context);
-    return text;
+    return instantiateText(instantiateBlk(text, context), context);
 }
+
 
 function instantiateArray(text, arr) {
     let result = '';
@@ -80,6 +81,7 @@ function instantiateText(text, context) {
             for (var i = 0; i < pathArray.length; i++) {
                 item = item[pathArray[i]];
             }
+
             return item;
         } else {
             if (context[name]) {

@@ -5,9 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
         <meta name="theme-color" content="#000000">
-        <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <link rel="icon" type="image/x-icon" href="/static/images/vanillaFavicon.png">
+        <link rel="apple-touch-startup-image" href="/static/images/vanilla512x512.png" />
         <link rel="stylesheet" href="/static/main.css" charset="utf-8">
         <link rel="manifest" href="manifest.json">
         <title>VanillaChat</title>
@@ -25,12 +27,12 @@
                 <section id="messages">
                 </section>
                 <section class="inputSection">
-                    <form class="message_form" action="./public/posts.json" method="POST">
+                    <form class="message_form" action="./rooms/private" method="POST">
                         <div class="entries">
-                            <textarea name="message" autocapitalize="sentences" autofocus="true" placeholder="What's on your mind?"></textarea>
+                            <textarea name="message" autocapitalize="sentences" autofocus="true" placeholder="Type a message"></textarea>
                         </div>
                         <div class="submit">
-                            <input type="submit" name="post" value="POST">
+                            <input type="submit" name="post" value="SEND">
                         </div>
                     </form>
                 </section>

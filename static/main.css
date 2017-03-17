@@ -12,6 +12,7 @@ html, body {
 body {
     background: #e8eff9;
     position: relative;
+    text-rendering: optimizeLegibility;
 }
 
 main {
